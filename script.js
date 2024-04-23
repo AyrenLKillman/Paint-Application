@@ -7,6 +7,7 @@ const eraser = document.getElementById("eraser");
 const sizeCng = document.getElementById("size")
 const sizeUp = document.getElementById("increase")
 const sizeDown = document.getElementById("decrease")
+const save = document.getElementById("Save")
 
 
 let size = 20
@@ -25,6 +26,7 @@ let y
 //clear Event Listener (added by me)
 clearbtn.addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    color = NextColor.value
 });
 
 //color Change event listener (added by me)
@@ -60,7 +62,13 @@ sizeDown.addEventListener("click", () => {
     sizeCng.textContent = size
 });
 
+save.addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.save = "image.png";
+  link.href = canvas.toDataURL();
+  link.click();
 
+});
 
 
 
