@@ -7,15 +7,16 @@ const eraser = document.getElementById("eraser");
 const sizeCng = document.getElementById("size")
 const sizeUp = document.getElementById("increase")
 const sizeDown = document.getElementById("decrease")
-const save = document.getElementById("Save")
+const dotsonly = document.getElementById("dotonly")
+const dotsact = document.getElementById("dotsact")
 
-
-let size = 20
+let size = 10
 let isPressed = false
 let color = 'rgb(0,0,0)'
 let NextColor = document.getElementById("color");
 let x
 let y
+let dots = false
  
 
 
@@ -61,14 +62,19 @@ sizeDown.addEventListener("click", () => {
     }
     sizeCng.textContent = size
 });
-
-save.addEventListener("click", () => {
-  const link = document.createElement("a");
-  link.save = "image.png";
-  link.href = canvas.toDataURL();
-  link.click();
-
+//dots only function, it litterally turns off the function that makes the drawing smooth
+dotsonly.addEventListener("click", () => {
+    if (dots === false){
+        dots = true;
+        dotsact.classList.add("ACTIVATED")
+        dotsact.classList.remove("DEACTIVATED")
+    } else if (dots === true){
+        dots = false;
+        dotsact.classList.remove("ACTIVATED")
+        dotsact.classList.add("DEACTIVATED")
+    }
 });
+
 
 
 
@@ -114,12 +120,16 @@ function drawCircle(x,y){
 }
 
 function drawLine(x1, y1, x2, y2) {
+   if(dots === false){
     ctx.beginPath()
     ctx.moveTo(x1,y1)
     ctx.lineTo(x2, y2)
     ctx.strokeStyle = color
     ctx.lineWidth = size * 2
-    ctx.stroke()
+    ctx.stroke()} 
+    else {
+    }
+    
 }
 
 
